@@ -1,0 +1,81 @@
+#include <iostream.h>
+#include <string.h>
+
+class Employee {
+protected:
+    string Emp_name, Address, Mail_id, Mobile_no;
+    int Emp_id;
+    float BP; // Basic Pay
+
+public:
+    void getDetails() {
+        cout << "\nEnter Employee Name: ";
+        cin >> Emp_name;
+        cout << "Enter Employee ID: ";
+        cin >> Emp_id;
+        cout << "Enter Address: ";
+        cin >> Address;
+        cout << "Enter Mail ID: ";
+        cin >> Mail_id;
+        cout << "Enter Mobile Number: ";
+        cin >> Mobile_no;
+        cout << "Enter Basic Pay (BP): ";
+        cin >> BP;
+    }
+
+    void generatePaySlip() {
+        float DA = 0.97 * BP;
+        float HRA = 0.10 * BP;
+        float PF = 0.12 * BP;
+        float StaffClubFund = 0.001 * BP;
+
+        float Gross = BP + DA + HRA;
+        float Net = Gross - (PF + StaffClubFund);
+
+        cout << "\n---------- PAY SLIP ----------\n";
+        cout << "Employee Name     : " << Emp_name << endl;
+        cout << "Employee ID       : " << Emp_id << endl;
+        cout << "Address           : " << Address << endl;
+        cout << "Mail ID           : " << Mail_id << endl;
+        cout << "Mobile No         : " << Mobile_no << endl;
+        cout << "----------------------------------\n";
+        cout << "Basic Pay (BP)    : " << BP << endl;
+        cout << "DA (97% of BP)    : " << DA << endl;
+        cout << "HRA (10% of BP)   : " << HRA << endl;
+        cout << "PF (12% of BP)    : " << PF << endl;
+        cout << "Staff Club (0.1%) : " << StaffClubFund << endl;
+        cout << "----------------------------------\n";
+        cout << "GROSS SALARY      : " << Gross << endl;
+        cout << "NET SALARY        : " << Net << endl;
+        cout << "----------------------------------\n";
+    }
+};
+
+class AssistantProfessor : public Employee {};
+class AssociateProfessor : public Employee {};
+class Professor : public Employee {};
+
+int main() {
+    int choice;
+    cout << "1. Assistant Professor\n2. Associate Professor\n3. Professor\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    if (choice == 1) {
+        AssistantProfessor ap;
+        ap.getDetails();
+        ap.generatePaySlip();
+    } else if (choice == 2) {
+        AssociateProfessor asp;
+        asp.getDetails();
+        asp.generatePaySlip();
+    } else if (choice == 3) {
+        Professor p;
+        p.getDetails();
+        p.generatePaySlip();
+    } else {
+        cout << "Invalid Choice!\n";
+    }
+
+    return 0;
+}
